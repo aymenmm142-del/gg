@@ -14,21 +14,15 @@ import ProfilePage from '@/pages/ProfilePage';
 import AdminLoginPage from '@/pages/admin/AdminLoginPage';
 import AdminDashboard from '@/pages/admin/AdminDashboard';
 import AdminRestaurants from '@/pages/admin/AdminRestaurants';
-import AdminOrders from '@/pages/admin/AdminOrders';
-import AdminDrivers from '@/pages/admin/AdminDrivers';
-import AdminOffers from '@/pages/admin/AdminOffers';
-import AdminSettings from '@/pages/admin/AdminSettings';
+import AdminMenuItems from '@/pages/AdminMenuItems';
+import AdminOffers from '@/pages/AdminOffers';
 
 // صفحات السائق
 import DriverLoginPage from '@/pages/driver/DriverLoginPage';
-import DriverDashboard from '@/pages/driver/DriverDashboard';
-import DriverOrders from '@/pages/driver/DriverOrders';
-import DriverStats from '@/pages/driver/DriverStats';
-import DriverProfile from '@/pages/driver/DriverProfile';
+import DriverDashboard from '@/pages/DriverDashboard';
 
 // مكونات مشتركة
 import { AdminLayout } from '@/components/admin/AdminLayout';
-import { DriverLayout } from '@/components/driver/DriverLayout';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 function App() {
@@ -46,16 +40,14 @@ function App() {
 
             {/* مسارات الإدارة */}
             <Route path="/admin-login" component={AdminLoginPage} />
-            <Route path="/admin">
+            <Route path="/admin" nest>
               <ProtectedRoute userType="admin">
                 <AdminLayout>
                   <Switch>
                     <Route path="/admin" component={AdminDashboard} />
                     <Route path="/admin/restaurants" component={AdminRestaurants} />
-                    <Route path="/admin/orders" component={AdminOrders} />
-                    <Route path="/admin/drivers" component={AdminDrivers} />
+                    <Route path="/admin/menu-items" component={AdminMenuItems} />
                     <Route path="/admin/offers" component={AdminOffers} />
-                    <Route path="/admin/settings" component={AdminSettings} />
                   </Switch>
                 </AdminLayout>
               </ProtectedRoute>
@@ -63,16 +55,9 @@ function App() {
 
             {/* مسارات السائق */}
             <Route path="/driver-login" component={DriverLoginPage} />
-            <Route path="/delivery">
+            <Route path="/delivery" nest>
               <ProtectedRoute userType="driver">
-                <DriverLayout>
-                  <Switch>
-                    <Route path="/delivery" component={DriverDashboard} />
-                    <Route path="/delivery/orders" component={DriverOrders} />
-                    <Route path="/delivery/stats" component={DriverStats} />
-                    <Route path="/delivery/profile" component={DriverProfile} />
-                  </Switch>
-                </DriverLayout>
+                <Route path="/delivery" component={DriverDashboard} />
               </ProtectedRoute>
             </Route>
 
