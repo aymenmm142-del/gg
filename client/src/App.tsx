@@ -40,24 +40,44 @@ function App() {
 
             {/* مسارات الإدارة */}
             <Route path="/admin-login" component={AdminLoginPage} />
-            <Route path="/admin" nest>
+            
+            <Route path="/admin">
               <ProtectedRoute userType="admin">
                 <AdminLayout>
-                  <Switch>
-                    <Route path="/admin" component={AdminDashboard} />
-                    <Route path="/admin/restaurants" component={AdminRestaurants} />
-                    <Route path="/admin/menu-items" component={AdminMenuItems} />
-                    <Route path="/admin/offers" component={AdminOffers} />
-                  </Switch>
+                  <AdminDashboard />
+                </AdminLayout>
+              </ProtectedRoute>
+            </Route>
+            
+            <Route path="/admin/restaurants">
+              <ProtectedRoute userType="admin">
+                <AdminLayout>
+                  <AdminRestaurants />
+                </AdminLayout>
+              </ProtectedRoute>
+            </Route>
+            
+            <Route path="/admin/menu-items">
+              <ProtectedRoute userType="admin">
+                <AdminLayout>
+                  <AdminMenuItems />
+                </AdminLayout>
+              </ProtectedRoute>
+            </Route>
+            
+            <Route path="/admin/offers">
+              <ProtectedRoute userType="admin">
+                <AdminLayout>
+                  <AdminOffers />
                 </AdminLayout>
               </ProtectedRoute>
             </Route>
 
             {/* مسارات السائق */}
             <Route path="/driver-login" component={DriverLoginPage} />
-            <Route path="/delivery" nest>
+            <Route path="/delivery">
               <ProtectedRoute userType="driver">
-                <Route path="/delivery" component={DriverDashboard} />
+                <DriverDashboard />
               </ProtectedRoute>
             </Route>
 
